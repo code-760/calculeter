@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Calculator Design Fix</title>
+    
+</head>
+
+<body>
+    <div class="main">
+        <div class="cleculetr">
+            <div class="input">
+                <input type="text" placeholder="0" readonly>
+            </div>
+            <div class="keys">
+                <button class="key muted">AC</button>
+                <button class="key muted">⌫</button>
+                <button class="key muted">%</button>
+                <button class="key accent">/</button>
+
+                <button class="key">7</button>
+                <button class="key">8</button>
+                <button class="key">9</button>
+                <button class="key accent">*</button>
+
+                <button class="key">4</button>
+                <button class="key">5</button>
+                <button class="key">6</button>
+                <button class="key accent">-</button>
+
+                <button class="key">1</button>
+                <button class="key">2</button>
+                <button class="key">3</button>
+                <button class="key accent">+</button>
+
+                <button class="key round">( )</button>
+                <button class="key">0</button>
+                <button class="key">.</button>
+                <button class="key equal">=</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // AAPKA EXACT LOGIC (No Changes)
+        let opr = ["+", "-", "*", "/", "%", "."]
+        let calec = document.querySelector(".cleculetr")
+        let input = document.querySelector("input")
+        calec.addEventListener("click", (e) => {
+            let targetpoint = e.target
+            if (targetpoint.tagName == "BUTTON") {
+                let oldvalue = input.value
+                let lestchar = oldvalue[oldvalue.length - 1]
+                let afterremovelestchar = oldvalue.slice(0, oldvalue.length - 1)
+
+                if (targetpoint.innerHTML == "AC") {
+                    input.value = '';
+                }
+                else if (targetpoint.innerHTML == "=") {
+                    input.value = eval(input.value)
+                }
+                else if (targetpoint.innerHTML == "⌫") {
+                    input.value = oldvalue.slice(0, -1)
+                }
+                else {
+                    if (oldvalue.length === 0 && ((targetpoint.innerHTML == "*" || targetpoint.innerHTML == "/"))) {
+                        return
+                    }
+
+                    if (opr.includes(targetpoint.innerHTML) && opr.includes(lestchar)) {
+                        input.value = afterremovelestchar + targetpoint.innerHTML
+                        console.log(input.value);
+                    }
+                    else {
+                        input.value = oldvalue + targetpoint.innerHTML
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>
