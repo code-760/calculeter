@@ -58,9 +58,13 @@
                 if (targetpoint.innerHTML == "AC") {
                     input.value = '';
                 }
-                else if (targetpoint.innerHTML == "=") {
+               else if (targetpoint.innerHTML == "=") {
+                try {
                     input.value = eval(input.value)
+                } catch {
+                    input.value = "Error"
                 }
+            }
                 else if (targetpoint.innerHTML == "⌫") {
                     input.value = oldvalue.slice(0, -1)
                 }
